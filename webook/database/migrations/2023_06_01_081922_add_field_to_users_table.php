@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('alamat')->after('email')->nullable();
+            $table->string('avatar')->after('email')->nullable();
+            $table->string('role_id')->after('email');
         });
     }
 
@@ -27,6 +29,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('alamat');
+            $table->dropColumn('avatar');
+            $table->dropColumn('role_id');
         });
     }
 };

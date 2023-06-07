@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,7 +22,7 @@ class UserController extends Controller
 
         // dd($user);
 
-        return view('user',compact('user'));
+        return view('user.user',compact('user'));
     }
 
     /**
@@ -31,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user_create');
+        return view('user.user_create');
     }
 
     /**
@@ -42,9 +43,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // ubah nama file gambar dengan angka random
+        $imageName = time().'.'.$request->avatar->extension();
+
+        // upload file gambar ke folder avatar
+        Storage::putFileAs('public/avatar',$request->file('avatar'),$imageName);
+
         $user = User::create([
             'name' =>$request->name,
             'email' =>$request->email,
+            'role_id'=>$request->role_id,
+            'avatar'=>$request,
             'alamat' =>$request->alamat,
             'password' =>$request->password,
         ]);
@@ -74,7 +83,7 @@ class UserController extends Controller
         $user = User::where('id',$id)->first();
 
         // passing data ke view
-        return view('user_edit',compact('user'));
+        return view('user.user_edit',compact('user'));
     }
 
     /**

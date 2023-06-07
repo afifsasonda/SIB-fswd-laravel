@@ -19,6 +19,10 @@
         <label>Harga<span>*</span></label>
          <input type="text" class="form-control" name="harga" placeholder="harga">
     </div>
+    <div class="form-group">
+        {{-- <label>Kategori id<span>*</span></label> --}}
+         <input type="hidden" class="form-control" name="categories_id" placeholder="harga">
+    </div>
     <button type="submit" class="btn btn-primary" id="btn-submit" name="tambah">Tambahkan</button>
 </form>
 

@@ -21,6 +21,10 @@
         <label>Harga<span>*</span></label>
          <input type="text" class="form-control" value="{{ $product->harga }}" name="harga" placeholder="harga">
     </div>
+    <div class="form-group">
+        {{-- <label>Kategori id<span>*</span></label> --}}
+         <input type="hidden" class="form-control" value="{{ $product->categories_id }}" name="categories_id" placeholder="harga">
+    </div>
     <button type="submit" class="btn btn-primary" id="btn-submit" name="edit">Edit</button>
 </form>
 

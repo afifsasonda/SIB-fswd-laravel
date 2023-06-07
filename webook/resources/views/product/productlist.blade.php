@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($nama as $a)
+            @forelse ($product as $a)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $a }}</td>

@@ -24,11 +24,11 @@ class ProductController extends Controller
         // ];
         $product = Product::all();
 
-        return view('product',compact('product'));
+        return view('product.product',compact('product'));
     }
 
     public function productlist(){
-        return view('productlist');
+        return view('product.productlist');
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product_create');
+        return view('product.product_create');
     }
 
     /**
@@ -52,7 +52,8 @@ class ProductController extends Controller
         $product = Product::create([
             'nama' => $request -> nama,
             'deskripsi' => $request ->deskripsi,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'categories_id' =>$request->categories_id
         ]);
         return redirect('/product');
     }
@@ -78,7 +79,7 @@ class ProductController extends Controller
     {
         $product = Product::where('id',$id)->first();
 
-        return view('product_edit',compact('product'));
+        return view('product.product_edit',compact('product'));
     }
 
     /**
@@ -93,7 +94,8 @@ class ProductController extends Controller
         $product = Product::find($request->id)->update([
             'nama' => $request -> nama,
             'deskripsi' => $request ->deskripsi,
-            'harga' => $request->harga
+            'harga' => $request->harga,
+            'categories_id' =>$request->categories_id
         ]);
         return redirect('/product');
     }
@@ -110,6 +112,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // 
+        //
     }
 }

@@ -1,0 +1,106 @@
+/* :root{
+    --primary:#e2e2e2;
+    --secondary:#1D267D;
+} */
+:root {
+    --primary: #f1f6f9;
+    --font: #010101;
+    --secondary: #394867;
+    --secondary2: #212a3e;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: var(--primary);
+}
+.navigasi-top{
+    width: 100%;
+    border-bottom: 1px solid #212a3e;
+    height: 4.5rem;
+}
+.navigasi-top .logo-login{
+    padding: 1rem 7%;
+    /* background-color: yellow; */
+}
+.logo-login{
+    color: black;
+}
+.logo-login span{
+    color: #394867;
+}
+
+.title-login span{
+    font-style: bold;
+    color: var(--secondary);
+}
+.card{
+    margin-top: 2rem;
+    width: 45%;
+    height: auto;
+    padding: 1rem 3%;
+    background-color: var(--primary);
+    /* box-shadow: 1px 1px 1px black; */
+}
+.card h4{
+    color: #EA5455;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+.card p{
+    text-align: center;
+    margin:0px 1rem;
+    opacity: 0.9;
+    font-weight: 349;
+}
+.card form span{
+    color: #1D267D;
+}
+.card form label{
+    font-weight: 500;
+    opacity: 0.8;
+
+}
+.card form .remember{
+    display: flex;
+    justify-content: space-between;
+}
+.card a{
+    color: black;
+    font-weight: 500;
+    opacity: 0.8;
+}
+.card a:hover{
+    color: black;
+    font-weight: 500;
+    opacity: 0.8;
+    text-decoration: none;
+}
+.card form button{
+    margin-top: 1rem;
+    background-color: var(--secondary2);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.card form p b{
+    color: #1D267D;
+}
+@media(max-width:500px){
+    .body h1{
+        font-size: 30px;
+        /* margin-top: none; */
+    }
+    .card{
+        width: 90%;
+        height: auto;
+    }
+}

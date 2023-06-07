@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard',[DashboardController::class,'index']);
+
+// route login
+Route::get('login',[LoginController::class,'index']);
+Route::post('login',[LoginController::class,'authenticate']);
+// route register
+Route::get('register',[RegisterController::class,'index']);
+Route::post('register',[RegisterController::class,'store']);
+// logout
+Route::post('logout',[LoginController::class,'logout']);
+
+
 
 // Route product
 Route::get('/product',[ProductController::class,'index']);
@@ -31,6 +45,7 @@ Route::get('/product-edit/{id}',[ProductController::class,'edit']);
 Route::put('/product-update',[ProductController::class,'update']);
 // delete
 Route::get('/product-delete/{id}',[ProductController::class,'delete']);
+
 
 
 // route users

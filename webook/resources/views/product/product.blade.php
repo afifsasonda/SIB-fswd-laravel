@@ -6,9 +6,11 @@
         <div class="col-md-10">
             <h1>Data Product</h1>
         </div>
+        @if (Auth::user()->role_id == 'Admin')
         <div class="col-md-2">
             <a href="/product-create"class="btn btn-primary"><i data-feather="plus-square"></i></a>
         </div>
+        @endif
     </div>
 </div>
 
@@ -29,8 +31,10 @@
                 <td>{{ $a->nama }}</td>
                 <td>{{ $a->deskripsi }}</td>
                 <td>
+                    @if (Auth::user()->role_id == 'Admin')
                     <a href="/product-edit/{{ $a->id }}" class="btn btn-warning"><i data-feather="edit"></i></a>
                     <a href="/product-delete/{{ $a->id }}" class="btn btn-danger"><i data-feather="trash"></i></a>
+                    @endif
                 </td>
             </tr>
 
