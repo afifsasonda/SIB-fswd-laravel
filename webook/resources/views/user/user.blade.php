@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <h1>Data Users</h1>
         </div>
-        @if (Auth::user()->role_id == 'Admin')
+        @if (Auth::user()->roles == 'Admin')
         <div class="col-md-2">
             <a href="/user-create" class="btn btn-primary"><i data-feather="user-plus"></i></a>
         </div>
@@ -39,7 +39,7 @@
                     @endif
                 </td>
                 <td>
-                    @if (Auth::user()->role_id == 'Admin')
+                    @if (Auth::user()->roles == 'Admin')
                     <a href="/user-edit/{{ $u->id }}" class="btn btn-warning"><i data-feather="edit"></i></a>
                     <a href="/user-delete/{{ $u->id }}" class="btn btn-danger"><i data-feather="trash"></i></a>
                     @endif

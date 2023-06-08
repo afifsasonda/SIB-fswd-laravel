@@ -44,7 +44,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            @if (Auth::user()->role_id == 'Admin')
+            @if (Auth::user()->roles == 'Admin')
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -91,7 +91,7 @@
             </li>
             @endif
 
-            @if (Auth::user()->role_id == 'Staff')
+            @if (Auth::user()->roles == 'Staff')
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -137,7 +137,7 @@
             </li>
             @endif
 
-            @if (Auth::user()->role_id == 'User')
+            @if (Auth::user()->roles == 'User')
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -166,7 +166,6 @@
                     </div>
                 </div>
             </li>
-
             @endif
 
         </ul>
@@ -373,7 +372,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">WeBOOK Store</h6>
                                 </div>
                                  <!-- Card Body -->
-                                 @if (Auth::user()->role_id == 'Admin')
+                                 @if (Auth::user()->roles == 'Admin')
                                  <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -392,10 +391,36 @@
                                               <p class="card-text">Grup Pengguna, Daftar Pengguna</p>
                                               <a href="{{ url('/user') }}" class="btn btn-primary">Lihat</a>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+
+                                @if (Auth::user()->roles == 'Staff')
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">Data Produk</h5>
+                                              <p class="card-text">Kategori, Daftar Produk</p>
+                                              <a href="{{ url('/product') }}" class="btn btn-primary">Lihat</a>
+                                            </div>
                                           </div>
                                         </div>
-                                      </div>
-                                @else
+                                        <div class="col-sm-6">
+                                          <div class="card">
+                                            <div class="card-body">
+                                              <h5 class="card-title">Data User</h5>
+                                              <p class="card-text">Grup Pengguna, Daftar Pengguna</p>
+                                              <a href="{{ url('/user') }}" class="btn btn-primary">Lihat</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+
+                                @if (Auth::user()->roles == 'User')
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -409,8 +434,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                 @endif
+                                @endif
 
                                     <div class="chart-area">
                                         <canvas id="myAreaChart">

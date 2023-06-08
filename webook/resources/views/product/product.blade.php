@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <h1>Data Product</h1>
         </div>
-        @if (Auth::user()->role_id == 'Admin')
+        @if (Auth::user()->roles == 'Admin')
         <div class="col-md-2">
             <a href="/product-create"class="btn btn-primary"><i data-feather="plus-square"></i></a>
         </div>

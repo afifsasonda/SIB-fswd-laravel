@@ -47,52 +47,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            @if (Auth::user()->role_id == 'Admin')
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <div class="sb-sidenav-menu-heading">Content</div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <span>Slider</span>
-                    </a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <div class="sb-sidenav-menu-heading">Management</div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/product') }}" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <span>Produk</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Kategori</a>
-                        <a class="collapse-item" href="{{ url('/product') }}">Daftar Produk</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/user') }}" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <span>Pengguna</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('/role') }}">Grup Pengguna</a>
-                        <a class="collapse-item" href="{{ url('/user') }}">Daftar Pengguna</a>
-                    </div>
-                </div>
-            </li>
-            @endif
-            
-            @if (Auth::user()->role_id == 'Staff')
+            @if (Auth::user()->roles == 'Admin')
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -137,8 +92,7 @@
             </li>
             @endif
 
-            @if (Auth::user()->role_id == 'User')
-
+            @if (Auth::user()->roles == 'Staff')
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -147,7 +101,52 @@
                 <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <span>Slider</span>
-                    </a>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <div class="sb-sidenav-menu-heading">Management</div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/product') }}" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <span>Produk</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Kategori</a>
+                        <a class="collapse-item" href="{{ url('/product') }}">Daftar Produk</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/user') }}" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <span>Pengguna</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ url('/role') }}">Grup Pengguna</a>
+                        <a class="collapse-item" href="{{ url('/user') }}">Daftar Pengguna</a>
+                    </div>
+                </div>
+            </li>
+            @endif
+
+            @if (Auth::user()->roles == 'User')
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <div class="sb-sidenav-menu-heading">Content</div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <span>Slider</span>
+                </a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">

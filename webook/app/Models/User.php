@@ -19,7 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role_id',
+        'roles',
         'avatar',
         'alamat',
         'password',
@@ -47,7 +47,7 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany(Order::class, 'users_id','id');
     }
-    public function role(){
-        return $this->hasOne(Role::class,'role_id','id');
-    }
+    // public function role(){
+    //     return $this->hasOne(Role::class,'role_id','id');
+    // }
 }

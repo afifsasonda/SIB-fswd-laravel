@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Daftar</title>
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
     <!-- cdn Boostrap -->
@@ -34,7 +34,7 @@
                 <h4 class="text-center">Daftarkan Akun</h4>
                 {{-- <p class="center"><b>Sudah punya akun WeBOOK Store? Yuk masuk untuk mengakses halaman store</b></p> --}}
 
-                <form action="{{ url('/register') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('/register') }}" method="POST">
                     {{-- wajib csrf untuk form laravel untuk keamanan --}}
                     @csrf
                     <br>
@@ -48,26 +48,26 @@
                     </div>
                     {{-- <div class="form-group">
                         <label>Role<span>*</span></label>
-                        <input type="text" class="form-control" name="role_id">
+                        <input type="text" class="form-control" name="roles">
                     </div> --}}
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label><b>Role</b><span>*</span></label>
-                        {{-- <input type="text" class="form-control" name="role_id" placeholder="Pilih Role"> --}}
-                        <select name="role_id" class="form-control">
+                        <input type="text" class="form-control" name="role_id" placeholder="Pilih Role">
+                        <select name="roles" class="form-control">
                             <option selected aria-label="Disabled">Pilih Role</option>
                             <option>Admin</option>
                             <option>Staff</option>
                             <option>User</option>
                         </select>
-                    </div>
-                    <div class="mb-3">
+                    </div> --}}
+                    {{-- <div class="mb-3">
                         <label for="formFile" class="form-label"><b>Unggah Foto</b></label>
                         <input class="form-control" type="file" id="avatar" name="avatar">
-                    </div>
-                    <div class="form-group">
+                    </div> --}}
+                    {{-- <div class="form-group">
                         <label type-h>Alamat</label>
-                        <input type="text" name="alamat" class="form-control" name="email">
-                    </div>
+                        <input type="hidden" name="alamat" class="form-control" name="email">
+                    </div> --}}
                     <div class="form-group">
                         <label>Password<span>*</span></label>
                          <input type="password" class="form-control" name="password">
