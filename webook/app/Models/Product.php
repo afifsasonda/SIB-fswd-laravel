@@ -13,7 +13,8 @@ class Product extends Model
         'nama',
         'deskripsi',
         'harga',
-        'categories_id'
+        'categories_id',
+        'file'
     ];
 
     public function category(){

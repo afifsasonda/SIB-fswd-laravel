@@ -21,7 +21,10 @@
                 <th>No.</th>
                 <th>Nama Product</th>
                 <th>Deskripsi</th>
+                <th>Gambar</th>
+                @if (Auth::user()->roles == 'Admin')
                 <th>Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -30,8 +33,9 @@
                 <td>{{ $loop->iteration }}.</td>
                 <td>{{ $a->nama }}</td>
                 <td>{{ $a->deskripsi }}</td>
+                <td><img src="{{ asset('storage/gambar/'. $a->file) }}" style="height: 50px; width: 50px;"></td>
                 <td>
-                    @if (Auth::user()->role_id == 'Admin')
+                    @if (Auth::user()->roles == 'Admin')
                     <a href="/product-edit/{{ $a->id }}" class="btn btn-warning"><i data-feather="edit"></i></a>
                     <a href="/product-delete/{{ $a->id }}" class="btn btn-danger"><i data-feather="trash"></i></a>
                     @endif

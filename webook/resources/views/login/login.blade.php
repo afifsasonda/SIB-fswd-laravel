@@ -33,18 +33,24 @@
             <div class="card">
                 <h4 class="text-center">Masuk ke Akun</h4>
                 <p class="center"><b>Sudah punya akun WeBOOK Store? Yuk masuk untuk mengakses halaman store</b></p>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger mb-3 m-auto" role="alert">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                    </div>
+                @endif
                 <form action="{{ url('/login') }}" method="POST">
                     {{-- wajib csrf untuk form laravel untuk keamanan --}}
                     @csrf
                     <br>
 
                     <div class="form-group">
-                        <label>Email<span>*</span></label>
+                        <label>Email</label>
                         <input type="text" class="form-control" name="email" placeholder="Masukkan Email">
                     </div>
                     <div class="form-group">
-                        <label>Password<span>*</span></label>
+                        <label>Password</label>
                          <input type="password" class="form-control" name="password" placeholder="Masukkan Password">
                     </div>
                     <div class="remember">

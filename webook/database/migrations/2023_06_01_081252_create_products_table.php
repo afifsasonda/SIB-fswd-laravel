@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('deskripsi',100);
             $table->string('harga');
             $table->bigInteger('categories_id')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

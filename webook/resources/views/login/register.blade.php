@@ -39,11 +39,11 @@
                     @csrf
                     <br>
                     <div class="form-group">
-                        <label>Username<span>*</span></label>
+                        <label>Username<span style="color: red">*</span></label>
                         <input type="text" class="form-control" name="username">
                     </div>
                     <div class="form-group">
-                        <label>Email<span>*</span></label>
+                        <label>Email<span style="color: red">*</span></label>
                         <input type="text" class="form-control" name="email">
                     </div>
                     {{-- <div class="form-group">
@@ -51,9 +51,9 @@
                         <input type="text" class="form-control" name="roles">
                     </div> --}}
                     {{-- <div class="form-group">
-                        <label><b>Role</b><span>*</span></label>
-                        <input type="text" class="form-control" name="role_id" placeholder="Pilih Role">
-                        <select name="roles" class="form-control">
+                        <label><b>Role</b><span>*</span></label> --}}
+                        {{-- <input type="text" class="form-control" name="role_id" placeholder="Pilih Role"> --}}
+                        {{-- <select name="roles" class="form-control">
                             <option selected aria-label="Disabled">Pilih Role</option>
                             <option>Admin</option>
                             <option>Staff</option>
@@ -69,7 +69,7 @@
                         <input type="hidden" name="alamat" class="form-control" name="email">
                     </div> --}}
                     <div class="form-group">
-                        <label>Password<span>*</span></label>
+                        <label>Password<span style="color: red">*</span></label>
                          <input type="password" class="form-control" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary" id="btn-submit" name="masuk">Daftar</button>

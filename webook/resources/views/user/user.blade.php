@@ -20,7 +20,10 @@
             <tr>
                 <th>No.</th>
                 <th>Nama Pengguna</th>
+                <th>Role</th>
+                @if (Auth::user()->roles == 'Admin')
                 <th>Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -38,6 +41,7 @@
                         -
                     @endif
                 </td>
+                <td>{{ $u->roles }}</td>
                 <td>
                     @if (Auth::user()->roles == 'Admin')
                     <a href="/user-edit/{{ $u->id }}" class="btn btn-warning"><i data-feather="edit"></i></a>
@@ -62,11 +66,11 @@
     Keterangan:
    <p>
     @if (count($user)== 1)
-        saya memiliki 1 product
+        saya memiliki 1 user
     @elseif (count($user)>1)
-        Saya memiliki banyak produk
+        Saya memiliki banyak user
     @else
-        saya tidak memiliki produk
+        saya tidak memiliki user
     @endif
    </p>
 </p>

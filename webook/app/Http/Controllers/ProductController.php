@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+// use App\Http\Controllers\storeAs;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -49,13 +52,51 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create([
+        // validate form
+        // $this->validate($request,[
+        //     'nama' => 'required|min:3|max:50',
+        //     'deskripsi'=> 'required|max:100',
+        //     'harga' => 'required|integer',
+        //     'file'=> 'required|image|mimes:png,jpg,jpeg|max:2048'
+        // ]);
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|min:3|max:50',
+            'deskripsi'=> 'required|max:100',
+            'harga' => 'required|integer',
+            'file'=> 'image|mimes:png,jpg,jpeg'
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        // upload image
+        // $file = $request->file('file');
+        // $file->storeAs('public/posts',$file->hashName());
+        // $file = Storage::putFileAs('public/gambar', $request->file('file'),$file);
+        if($request->hasFile('file')){
+            $nama = $request->file('file');
+            $fileNama = 'Product_' . time() . '.' . $nama->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/gambar', $request->file('file'),$fileNama);
+        }
+
+        // create produk
+        Product::create([
             'nama' => $request -> nama,
             'deskripsi' => $request ->deskripsi,
             'harga' => $request->harga,
-            'categories_id' =>$request->categories_id
+            // 'categories_id' =>$request->categories_id,
+            'file'=>$fileNama
         ]);
-        return redirect('/product');
+
+        return redirect('/product')->with('Sukses!','Data berhasil disimpan');
+
+
+        // notif ke user benar atau salah pada form yg diisi
+        // if($validator->fails()){
+        //     return back()->with('error', $validator->error());
+        // }
+
+
     }
 
     /**
@@ -91,14 +132,42 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
+        // validator
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|min:3|max:50',
+            'deskripsi'=> 'required|max:100',
+            'harga' => 'required|integer',
+            'file'=> 'image|mimes:png,jpg,jpeg'
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+
+        }
+        if($request->hasFile('file')){
+            $nama = $request->file('file');
+            $fileNama = 'Product_' . time() . '.' . $nama->getClientOriginalExtension();
+            $path = Storage::putFileAs('public/gambar', $request->file('file'),$fileNama);
+        }
+
+        //upload image
+        // $file = $request->file('file');
+        // $file->storeAs('public/gambar',$file->hashName());
+
+
         $product = Product::find($request->id)->update([
             'nama' => $request -> nama,
             'deskripsi' => $request ->deskripsi,
             'harga' => $request->harga,
-            'categories_id' =>$request->categories_id
+            'categories_id' =>$request->categories_id,
+            'file'=>$fileNama
         ]);
+
+        //delete old image
+        Storage::delete('public/gambar/'.$product->file);
+
         return redirect('/product');
     }
+
     public function delete($id){
         $product = Product::find($id)->delete();
         return redirect('/product');

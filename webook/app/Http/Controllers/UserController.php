@@ -53,7 +53,7 @@ class UserController extends Controller
             'name' =>$request->name,
             'email' =>$request->email,
             'roles'=>$request->roles,
-            'avatar'=>$request->avatar,
+            'avatar'=>$request,
             'alamat' =>$request->alamat,
             'password' =>$request->password,
         ]);
@@ -98,6 +98,7 @@ class UserController extends Controller
         $user = User::find($request->id)->update([
             'name' =>$request->name,
             'email' =>$request->email,
+            'roles'=>$request->roles,
             'alamat' =>$request->alamat,
             'password' =>$request->password
         ]);

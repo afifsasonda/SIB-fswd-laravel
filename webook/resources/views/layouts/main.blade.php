@@ -23,6 +23,8 @@
     {{-- feather icons --}}
     <script src="https://unpkg.com/feather-icons"></script>
 
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
+
 </head>
 
 <body id="page-top">
@@ -373,7 +375,6 @@
     <script>
         feather.replace()
     </script>
-
 </body>
 
 </html>
