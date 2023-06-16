@@ -51,11 +51,9 @@
 
             <div class="sb-sidenav-menu-heading">Content</div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="{{ url('/slider') }}">
                         <span>Slider</span>
-                    </a>
-
+                </a>
             </li>
 
             <!-- Divider -->
@@ -97,11 +95,9 @@
 
             <div class="sb-sidenav-menu-heading">Content</div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="{{ url('/slider') }}">
                         <span>Slider</span>
-                    </a>
-
+                </a>
             </li>
 
             <!-- Divider -->
@@ -143,11 +139,9 @@
 
             <div class="sb-sidenav-menu-heading">Content</div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ url('/slider') }}" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="{{ url('/slider') }}">
                         <span>Slider</span>
-                    </a>
-
+                </a>
             </li>
 
             <!-- Divider -->
@@ -225,16 +219,16 @@
                                 </form>
                             </div>
                         </li>
+                        <a class="mr-2 d-lg-block text-600 mt-4" href="{{ url('/') }}">Home</a>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{-- dd($user); --}}
+                                {{-- <img style="height: 50px; width: 50px; border-radius:50%;background-size:cover" src="/file/{{ $user->avatar }}"> --}}
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                {{-- <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg"> --}}
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -242,14 +236,6 @@
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

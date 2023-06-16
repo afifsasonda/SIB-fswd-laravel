@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -18,7 +19,8 @@ class UserController extends Controller
         // $user = User::all();
 
         // panggil ke method orders di model user
-        $user = User::with('orders')->get();
+        // $user = User::with('orders')->get();
+        $user = User::all();
 
         // dd($user);
 
@@ -44,21 +46,39 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // ubah nama file gambar dengan angka random
-        $imageName = time().'.'.$request->avatar->extension();
+        // $imageName = time().'.'.$request->avatar->extension();
 
         // upload file gambar ke folder avatar
-        Storage::putFileAs('public/avatar',$request->file('avatar'),$imageName);
+        // Storage::putFileAs('public/avatar',$request->file('avatar'),$imageName);
 
-        $user = User::create([
-            'name' =>$request->name,
-            'email' =>$request->email,
+        $this->validate($request,[
+            'name' => 'required|min:3|max:20',
+            'email' => 'required',
+            'roles' => 'required',
+            'avatar' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'alamat' => 'required|max:200',
+            'password' => 'required|min:6|max:15'
+        ]);
+        $user = $request->all();
+        if ($avatar = $request->file('avatar')) {
+            $destinationPath = 'file/';
+            $profileImage = date('YmdHis') . "." . $avatar->getClientOriginalExtension();
+            $avatar->move($destinationPath, $profileImage);
+            $user['avatar'] = "$profileImage";
+        }
+
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
             'roles'=>$request->roles,
-            'avatar'=>$request,
-            'alamat' =>$request->alamat,
-            'password' =>$request->password,
+            'avatar'=>$request->avatar,
+            'alamat'=>$request->alamat,
+            'password'=>Hash::make($request->password)
         ]);
 
-        return redirect('/user');
+
+
+        return redirect('/user')->with('Sukses', ' User Berhasil disimpan');
     }
 
     /**
@@ -95,14 +115,41 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find($request->id)->update([
-            'name' =>$request->name,
-            'email' =>$request->email,
-            'roles'=>$request->roles,
-            'alamat' =>$request->alamat,
-            'password' =>$request->password
+        $request->validate([
+            'name' => 'required',
+            // 'email' => 'required',
+            'roles' => 'required',
+            'avatar' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'alamat' => 'required|max:200',
+            // 'password' => 'required|min:6|max:15'
         ]);
-        return redirect('/user');
+
+        $user = User::where('id', $request->id)->first();
+
+        if ($file = $request->file('avatar')) {
+            $destinationPath = 'file/';
+            $profileImage = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $profileImage);
+            $user['avatar'] = "$profileImage";
+        }
+        else{
+            unset($user['avatar']);
+        }
+
+        $user->update([
+            'avatar' => $profileImage
+        ]);
+
+        $user->update([
+            'name'=>$request->name,
+            // 'email'=>$request->email,
+            'roles'=>$request->roles,
+            // 'avatar'=>$request->avatar,
+            'alamat'=>$request->alamat,
+            // 'password'=>Hash::make($request->password)
+        ]);
+
+        return redirect('/user')->with("Succes",'User Updated Successfully');
     }
 
     public function delete($id){

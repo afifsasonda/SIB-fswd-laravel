@@ -25,9 +25,11 @@ class ProductController extends Controller
         //     'Jam Tangan',
         //     'Baju'
         // ];
-        $product = Product::all();
+        $products = Product::all();
 
-        return view('product.product',compact('product'));
+        return view('product.product',[
+            'products' => $products
+        ]);
     }
 
     public function productlist(){
@@ -41,6 +43,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+
         return view('product.product_create');
     }
 
@@ -53,48 +56,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // validate form
-        // $this->validate($request,[
-        //     'nama' => 'required|min:3|max:50',
-        //     'deskripsi'=> 'required|max:100',
-        //     'harga' => 'required|integer',
-        //     'file'=> 'required|image|mimes:png,jpg,jpeg|max:2048'
-        // ]);
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|min:3|max:50',
-            'deskripsi'=> 'required|max:100',
+        $this->validate($request,[
+            'nama' => 'required|min:3|max:50',
+            'deskripsi'=> 'required|max:200',
             'harga' => 'required|integer',
-            'file'=> 'image|mimes:png,jpg,jpeg'
+            'file'=> 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
+
+        $input = $request->all();
+
+        // $input['file'] = $request->file('file')->store('assets/product','public');
+
+        // $products = Product::create($input);
+
+        if ($file = $request->file('file')) {
+            $destinationPath = 'file/';
+            $profileImage = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $profileImage);
+            $input['file'] = "$profileImage";
         }
 
-        // upload image
-        // $file = $request->file('file');
-        // $file->storeAs('public/posts',$file->hashName());
-        // $file = Storage::putFileAs('public/gambar', $request->file('file'),$file);
-        if($request->hasFile('file')){
-            $nama = $request->file('file');
-            $fileNama = 'Product_' . time() . '.' . $nama->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/gambar', $request->file('file'),$fileNama);
-        }
-
-        // create produk
-        Product::create([
-            'nama' => $request -> nama,
-            'deskripsi' => $request ->deskripsi,
-            'harga' => $request->harga,
-            // 'categories_id' =>$request->categories_id,
-            'file'=>$fileNama
-        ]);
+        Product::create($input)->all();
 
         return redirect('/product')->with('Sukses!','Data berhasil disimpan');
-
-
-        // notif ke user benar atau salah pada form yg diisi
-        // if($validator->fails()){
-        //     return back()->with('error', $validator->error());
-        // }
 
 
     }
@@ -105,9 +89,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        // $product = Product::all();
+        // $product = Product::where('id',$id)->first();
+        // return view('welcome',compact('product'));
     }
 
     /**
@@ -118,9 +104,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id',$id)->first();
+        $products = Product::where('id',$id)->first();
 
-        return view('product.product_edit',compact('product'));
+        return view('product.product_edit',compact('products'));
     }
 
     /**
@@ -132,45 +118,41 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        // validator
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|min:3|max:50',
-            'deskripsi'=> 'required|max:100',
+        $request->validate([
+            'nama' => 'required|min:3|max:50',
+            'deskripsi'=> 'required|max:200',
             'harga' => 'required|integer',
-            'file'=> 'image|mimes:png,jpg,jpeg'
+            'file'=> 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator);
 
+        $products = Product::where('id', $request->id)->first();
+
+        if ($file = $request->file('file')) {
+            $destinationPath = 'file/';
+            $profileImage = date('YmdHis') . "." . $file->getClientOriginalExtension();
+            $file->move($destinationPath, $profileImage);
+            $products['file'] = "$profileImage";
         }
-        if($request->hasFile('file')){
-            $nama = $request->file('file');
-            $fileNama = 'Product_' . time() . '.' . $nama->getClientOriginalExtension();
-            $path = Storage::putFileAs('public/gambar', $request->file('file'),$fileNama);
+        else{
+            unset($products['file']);
         }
 
-        //upload image
-        // $file = $request->file('file');
-        // $file->storeAs('public/gambar',$file->hashName());
+        $products->update([
+            'file' => $profileImage
+        ]);
 
-
-        $product = Product::find($request->id)->update([
-            'nama' => $request -> nama,
-            'deskripsi' => $request ->deskripsi,
+        $products->update([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
-            'categories_id' =>$request->categories_id,
-            'file'=>$fileNama
         ]);
 
-        //delete old image
-        Storage::delete('public/gambar/'.$product->file);
-
-        return redirect('/product');
+        return redirect('/product')->with("Succes",'Product Updated Successfully');
     }
 
     public function delete($id){
-        $product = Product::find($id)->delete();
-        return redirect('/product');
+        $products = Product::find($id)->delete();
+        return redirect('product');
     }
 
     /**

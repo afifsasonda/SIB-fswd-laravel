@@ -21,6 +21,7 @@
                 <th>No.</th>
                 <th>Nama Pengguna</th>
                 <th>Role</th>
+                <th>Avatar</th>
                 @if (Auth::user()->roles == 'Admin')
                 <th>Aksi</th>
                 @endif
@@ -42,6 +43,7 @@
                     @endif
                 </td>
                 <td>{{ $u->roles }}</td>
+                <td><img src="/file/{{ $u->avatar }}" alt="" style="height: 50px; width: 50px; border-radius:50%;background-size:cover"></td>
                 <td>
                     @if (Auth::user()->roles == 'Admin')
                     <a href="/user-edit/{{ $u->id }}" class="btn btn-warning"><i data-feather="edit"></i></a>
@@ -60,19 +62,5 @@
 
     </table>
 </div>
-
-{{-- <p>nama product : {{ $nama }}</p> --}}
-<p>
-    Keterangan:
-   <p>
-    @if (count($user)== 1)
-        saya memiliki 1 user
-    @elseif (count($user)>1)
-        Saya memiliki banyak user
-    @else
-        saya tidak memiliki user
-    @endif
-   </p>
-</p>
 
 @endsection

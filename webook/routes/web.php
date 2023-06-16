@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +21,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// home
+Route::get('/',[HomeController::class,'index']);
 Route::get('/dashboard',[DashboardController::class,'index']);
+
+// slider
+Route::get('/slider',[SliderController::class,'index']);
+Route::get('/slider-create',[SliderController::class,'create']);
+Route::post('/slider-create-post',[SliderController::class,'store']);
+Route::get('/slider-edit/{id}',[SliderController::class,'edit']);
+Route::put('/slider-update',[SliderController::class,'update']);
+Route::get('/slider-delete/{id}',[SliderController::class,'delete']);
+// Route::get('/',[SliderController::class,'show']);
+// Route::get('/slider/{slider}', 'SliderController@show')->banner('slider.show');
+
 
 // route login
 Route::get('login',[LoginController::class,'index']);
@@ -45,6 +58,11 @@ Route::get('/product-edit/{id}',[ProductController::class,'edit']);
 Route::put('/product-update',[ProductController::class,'update']);
 // delete
 Route::get('/product-delete/{id}',[ProductController::class,'delete']);
+//show
+// Route::get('/',[ProductController::class,'show']);
+// show
+// Route::get('/','ProductController@show')->name('product.show');
+// Route::get('/',[ProductController::class,'show']);
 
 
 

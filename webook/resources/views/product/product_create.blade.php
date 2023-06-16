@@ -2,6 +2,15 @@
 
 @section('data')
 <h2>Form Create Product</h2>
+@if ($errors->any())
+    <div class="alert alert-danger mb-3 m-auto" role="alert">Whoops! <strong>There were some problems with your input. </strong>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <form action="/product-create-post" method="post" enctype="multipart/form-data">
     @csrf
@@ -12,7 +21,7 @@
         <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Product">
         @error('nama')
          <div class="alert alert-danger mt-2">
-            <p>Min 3 huruf</p>
+            <p>Min 3 karakter</p>
          </div>
          @enderror
     </div>
@@ -53,7 +62,8 @@
          @enderror
     </div>
     <button type="submit" class="btn btn-primary" id="btn-submit" name="tambah">Tambahkan</button>
-    <button type="reset" class="btn btn-secondary" name="reset">Reset</button>
+    <button type="reset" class="btn btn-warning" name="reset">Reset</button>
+    <a href="/slider" class="btn btn-secondary">Cancel</a>
 </form>
 
 @endsection

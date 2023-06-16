@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Product;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,18 +25,14 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $product = [
-            'laptop',
-            'Tv',
-            'Handphone',
-            'Jam Tangan',
-            'Baju'
-        ];
+        $product = Product::all();
 
 
 
         View::composer(['product','productlist'],function($view) use($product){
             $view->with('nama',$product);
         });
+
+
     }
 }

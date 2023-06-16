@@ -59,7 +59,6 @@
                 @csrf
                 {{-- <a type="submit" class="masuk">Logout</a> --}}
                 <button type="submit" class="btn btn-primary masuk">Logout</button>
-
             </form>
             @else
             <a href="{{ url('/login') }}" class="masuk">Masuk</a>
@@ -96,15 +95,20 @@
         <div class="slider">
             <div class="slide_viewer">
               <div class="slide_group">
+                @foreach ( $slider as $s)
+
                 <div class="slide">
-                    <img src="{{ asset('assets/images/slide2.png') }}" style="width: 100%" height="400px">
+                    <img src="/file/{{ $s->banner }}" style="width: 100%" height="400px">
+                    {{-- {{ asset('file/'. $s->banner) }} --}}
                 </div>
-                <div class="slide">
+
+                @endforeach
+                {{-- <div class="slide">
                     <img src="{{ asset('assets/images/sldbook2.jpg') }}" style="width: 100%" height="400px">
                 </div>
                 <div class="slide">
                     <img src="{{ asset('assets/images/sldbook3.jpeg') }}" style="width: 100%" height="400px">
-                </div>
+                </div> --}}
               </div>
             </div>
           </div><!-- End // .slider -->
@@ -138,56 +142,60 @@
     </div>
     <div class="cards-product">
         <h2>Produk Unggulan</h2>
+        @forelse ($products as $product)
         <div class="cards">
             <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}">
+                <img src="/file/{{ $product->file }}">
                 <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
+                    <h5>{{ $product->nama }}</h5>
+                    <h5>{{ $product->deskripsi }}</h5>
+                    <p>Rp.{{ $product->harga }}</p>
+                </div>
+            </div>
+        @empty
+        <p>Kosong</p>
+        @endforelse
+            {{-- <div class="card">
+                <img src="{{ asset('file/20230611042401.jpg') }}" alt="">
+                <div class="captions">
+                    <h5>Metodologi Latihan Olahraga</h5>
+                    <h5>Pengarang: Setyo Budiwanto</h5>
                     <p>Rp.200.000</p>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}" alt="">
+                <img src="{{ asset('file/20230612232645.jpg') }}" alt="">
                 <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
+                    <h5>Ekonomi Mikro</h5>
+                    <h5>Analisis dan pendekatan Praktis Ekonomi</h5>
                     <p>Rp.200.000</p>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}" alt="">
+                <img src="{{ asset('file/20230612211716.jpg') }}" alt="">
                 <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
-                    <p>Rp.200.000</p>
+                    <h5>Ilmu Filsafat</h5>
+                    <h5>Hakikat mencari pengetahuan</h5>
+                    <p>Rp.500.000</p>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}" alt="">
+                <img src="{{ asset('file/20230612235018.jpg') }}" alt="">
                 <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
-                    <p>Rp.200.000</p>
+                    <h5>Buku Game Development</h5>
+                    <h5>Unity Engine, Game Multiplayer with Photon</h5>
+                    <p>Rp.500.000</p>
                 </div>
             </div>
             <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}" alt="">
+                <img src="{{ asset('file/20230613161858.png') }}" alt="">
                 <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
-                    <p>Rp.200.000</p>
+                    <h5>Pengetahuan Seni Rupa</h5>
+                    <h5>Dasar dasar dalam Seni Rupa</h5>
+                    <p>Rp.1500.000</p>
                 </div>
             </div>
-            <div class="card">
-                <img src="{{ asset('assets/images/buku_teknologi_inf.jpg') }}" alt="">
-                <div class="captions">
-                    <h5>Najelaa Shihab</h5>
-                    <h5>Teknologi Untuk Masa Depan</h5>
-                    <p>Rp.200.000</p>
-                </div>
-            </div>
-        </div>
+        </div> --}}
     </div><!-- End // .directional_nav -->
 
 
